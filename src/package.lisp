@@ -63,6 +63,7 @@
            #:contains-p
            #:overlaps-p
            #:equals-p
+           #:equals-exact-p
            #:covers-p
            #:covered-by-p
            #:is-empty-p

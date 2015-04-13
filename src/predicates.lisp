@@ -37,6 +37,11 @@
   (geometry-1 %geometry)
   (geometry-2 %geometry))
 
+(define-geos-fun ("GEOSEqualsExact" :geos-prefix? nil :predicate? t) %geos-bool
+  (geometry-1 %geometry)
+  (geometry-2 %geometry)
+  (tolerance :double))
+
 (define-geos-fun ("GEOSCovers" :geos-prefix? nil :predicate? t) %geos-bool
   (geometry-1 %geometry)
   (geometry-2 %geometry))
