@@ -22,7 +22,7 @@ GEOS."))
   (make-instance 'point :x x :y y))
 
 (defgeneric make-point (coords)
-  "Make a point. COORDS must be a sequence of length two."
+  (:documentation "Make a point. COORDS must be a sequence of length two.")
   (:method ((coords list))
     (assert (= 2 (length coords)))
     (make-instance 'point
