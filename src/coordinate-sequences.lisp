@@ -86,3 +86,35 @@ column."
   (with-foreign-object (value :double)
     (%geos-coord-seq-get-y (context-handle-pointer *context-handle*) sequence idx value)
     (mem-ref value :double)))
+
+(define-geos-fun ("GEOSCoordSeq_getOrdinate" :make-friendly? nil) %geos-return
+  (sequence %coord-sequence)
+  (idx :unsigned-int)
+  (dim :unsigned-int)
+  (value :pointer))
+
+(defun geos-coord-seq-get-ordinate (sequence idx dim)
+  (with-foreign-object (value :double)
+    (%geos-coord-seq-get-ordinate (context-handle-pointer *context-handle*) sequence idx dim value)
+    (mem-ref value :double)))
+
+(define-geos-fun ("GEOSGeom_getCoordSeq") %coord-sequence
+  (g %geometry))
+
+(define-geos-fun ("GEOSCoordSeq_getDimensions" :make-friendly? nil) %geos-return
+  (s %coord-sequence)
+  (dims :pointer))
+
+(defun geos-coord-seq-get-dimensions (sequence)
+  (with-foreign-object (value :int)
+    (%geos-coord-seq-get-dimensions (context-handle-pointer *context-handle*) sequence value)
+    (mem-ref value :int)))
+
+(define-geos-fun ("GEOSCoordSeq_getSize" :make-friendly? nil) %geos-return
+  (s %coord-sequence)
+  (size :pointer))
+
+(defun geos-coord-seq-get-size (sequence)
+  (with-foreign-object (value :int)
+    (%geos-coord-seq-get-size (context-handle-pointer *context-handle*) sequence value)
+    (mem-ref value :int)))

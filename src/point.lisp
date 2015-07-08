@@ -5,7 +5,7 @@
 
 (in-package #:geos)
 
-(defclass point (geometry)
+(defclass point (geometry xarray::xarray-like)
   ((cached-x
     :accessor cached-x
     :initarg :x
@@ -80,3 +80,15 @@ GEOS."))
   (unless (cached-y self)
     (setf (cached-y self) (geos-geom-get-y self)))
   (cached-y self))
+
+(defmethod xdims ((p point))
+  (list (geos-coord-seq-get-size (geos-geom-get-coord-seq p))
+        (geos-coord-seq-get-dimensions (geos-geom-get-coord-seq p))))
+
+(defmethod xref ((p point) &rest subscripts)
+  (assert (= 2 (length subscripts)))
+  (assert (and (>= (first subscripts) 0)
+               (< (first subscripts) (geos-coord-seq-get-size (geos-geom-get-coord-seq p)))))
+  (assert (and (>= (second subscripts) 0)
+               (< (second subscripts) (geos-coord-seq-get-dimensions (geos-geom-get-coord-seq p)))))
+  (geos-coord-seq-get-ordinate (geos-geom-get-coord-seq p) (first subscripts) (second subscripts)))

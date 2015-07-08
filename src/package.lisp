@@ -3,7 +3,8 @@
 
 (defpackage #:geos
   (:use :cl
-        :cffi)
+        :cffi
+        :xarray)
   (:shadow #:intersection
            #:union)
   (:export #:geometry

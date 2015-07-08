@@ -7,7 +7,8 @@
   :version (:read-file-form "version.lisp-expr")
   :serial t
   :depends-on (#:cffi
-               #:trivial-garbage)
+               #:trivial-garbage
+               #:xarray)
   :author "Eric Timmons <etimmons@mit.edu>"
   :license "Lisp-LGPL"
   :components ((:module "src"

@@ -5,7 +5,7 @@
 
 (in-package #:geos)
 
-(defclass line-string (geometry)
+(defclass line-string (geometry xarray::xarray-like)
   ((cached-coords
     :accessor cached-coords
     :initarg :coords))
@@ -32,3 +32,15 @@
     coords)
   (:method (coords)
     (make-line-string coords)))
+
+(defmethod xdims ((line line-string))
+  (list (geos-coord-seq-get-size (geos-geom-get-coord-seq line))
+        (geos-coord-seq-get-dimensions (geos-geom-get-coord-seq line))))
+
+(defmethod xref ((line line-string) &rest subscripts)
+  (assert (= 2 (length subscripts)))
+  (assert (and (>= (first subscripts) 0)
+               (< (first subscripts) (geos-coord-seq-get-size (geos-geom-get-coord-seq line)))))
+  (assert (and (>= (second subscripts) 0)
+               (< (second subscripts) (geos-coord-seq-get-dimensions (geos-geom-get-coord-seq line)))))
+  (geos-coord-seq-get-ordinate (geos-geom-get-coord-seq line) (first subscripts) (second subscripts)))
