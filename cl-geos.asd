@@ -2,8 +2,8 @@
 ;;;; Licensed under Lisp-LGPL
 ;;;; CL-GEOS system definition
 
-(asdf:defsystem #:cl-geos
-  :description "A CFFI wrapper of GEOS."
+(defsystem #:cl-geos
+  :description "A CFFI wrapper of GEOS for performing geometric operations in Lisp."
   :version (:read-file-form "version.lisp-expr")
   :serial t
   :depends-on (#:cffi
@@ -31,7 +31,7 @@
   :perform (test-op :after (op c)
                     (funcall (read-from-string "fiveam:run!") :cl-geos)))
 
-(asdf:defsystem #:cl-geos/test
+(defsystem #:cl-geos/test
   :description "Tests for CL-GEOS."
   :version (:read-file-form "version.lisp-expr")
   :serial t
