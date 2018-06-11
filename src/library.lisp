@@ -45,7 +45,12 @@
     (tg:finalize handle #'(lambda () (finish-geos raw-pointer)))
     handle))
 
-(defvar *context-handle* (make-context-handle))
+(defvar *context-handle* nil)
+
+(defun register-context-handle ()
+  (setf *context-handle* (make-context-handle)))
+
+(uiop:register-image-restore-hook 'register-context-handle)
 
 
 ;;; Basic datatypes and error handling.

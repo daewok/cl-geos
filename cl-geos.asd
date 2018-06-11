@@ -8,6 +8,7 @@
   :serial t
   :depends-on (#:cffi
                #:trivial-garbage
+               #:uiop
                #:xarray)
   :author "Eric Timmons <etimmons@mit.edu>"
   :license "Lisp-LGPL"
